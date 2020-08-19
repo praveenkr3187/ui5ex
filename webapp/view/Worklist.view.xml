@@ -1,52 +1,21 @@
-<mvc:View
-	controllerName="ui5ex.uiexer.controller.Worklist"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic">
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="ui5ex.uiexer.controller.Worklist">
 
-	<semantic:SemanticPage
-		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
 
 		<semantic:titleHeading>
-			<Title
-				text="{i18n>worklistTitle}"
-				level="H2"/>
+			<Title text="{i18n>worklistTitle}" level="H2"/>
 		</semantic:titleHeading>
 
 		<semantic:content>
-			<Table
-				id="table"
-				width="auto"
-				items="{
-					path: '/Products',
-					sorter: {
-						path: 'ProductName',
-						descending: false
-					}
-				}"
-				noDataText="{worklistView>/tableNoDataText}"
-				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-				growing="true"
-				growingScrollToLoad="true"
-				updateFinished=".onUpdateFinished">
+			<Table id="table" width="auto" items="{      path: '/Products',      sorter: {       path: 'ProductName',       descending: false      }     }" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
 
 				<headerToolbar>
 					<OverflowToolbar>
-						<Title
-							id="tableHeader"
-							text="{worklistView>/worklistTableTitle}"
-							level="H3"/>
-						<ToolbarSpacer />
-						<SearchField
-							id="searchField"
-							tooltip="{i18n>worklistSearchTooltip}"
-							search=".onSearch">
+						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
+						<ToolbarSpacer/>
+						<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
 							<layoutData>
-								<OverflowToolbarLayoutData
-									maxWidth="200px"
-									priority="NeverOverflow"/>
+								<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
 							</layoutData>
 						</SearchField>
 					</OverflowToolbar>
@@ -62,17 +31,10 @@
 				</columns>
 
 				<items>
-					<ColumnListItem
-						type="Navigation"
-						press=".onPress">
+					<ColumnListItem type="Navigation" press=".onPress">
 						<cells>
-							<ObjectIdentifier
-								title="{ProductName}"/>
-							<ObjectNumber
-								number="{
-									path: 'UnitPrice',
-									formatter: '.formatter.numberUnit'
-								}"/>
+							<ObjectIdentifier title="{ProductName}"/>
+							<ObjectNumber number="{          path: 'UnitPrice',          formatter: '.formatter.numberUnit'         }" unit="USD"/>
 						</cells>
 					</ColumnListItem>
 				</items>
