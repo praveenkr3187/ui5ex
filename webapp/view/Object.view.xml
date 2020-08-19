@@ -1,30 +1,89 @@
-<mvc:View
-	controllerName="ui5ex.uiexer.controller.Object"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic">
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="ui5ex.uiexer.controller.Object">
 
-	<semantic:SemanticPage
-		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false"
-		busy="{objectView>/busy}"
-		busyIndicatorDelay="{objectView>/delay}">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}">
 
 		<semantic:titleHeading>
-			<Title
-				text="{ProductName}"
-				level="H2"/>
+			<Title text="{ProductName}" level="H2"/>
 		</semantic:titleHeading>
 
 		<semantic:headerContent>
-			<ObjectNumber
-				number="{
-					path: 'UnitPrice',
-					formatter: '.formatter.numberUnit'
-				}"
-			/>
+			<ObjectNumber number="{      path: 'UnitPrice',      formatter: '.formatter.numberUnit'     }"/>
 		</semantic:headerContent>
+		
+		<semantic:content>
+			<Table id="table" width="auto" items="{      path: '/Products',      sorter: {       path: 'ProductName',       descending: false      }     }" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
+						<ToolbarSpacer/>
+						<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
+							<layoutData>
+								<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+					</OverflowToolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="nameColumn">
+						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+					</Column>
+					<Column id="unitNumberColumn" hAlign="End">
+						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+					</Column>
+					<Column id="column0">
+					    <header>
+					        <Label text="Quantity Per Unit" id="label0"/>
+					    </header>
+					</Column>
+					<Column id="column1">
+					    <header>
+					        <Label text="Product ID" id="label1"/>
+					    </header>
+					</Column>
+					<Column id="column2">
+					    <header>
+					        <Label text="Category ID" id="label2"/>
+					    </header>
+					</Column>
+					<Column id="column3">
+					    <header>
+					        <Label text="Supplier ID" id="label3"/>
+					    </header>
+					</Column>
+					<Column id="column4">
+					    <header>
+					        <Label text="Units In Stock" id="label4"/>
+					    </header>
+					</Column>
+					<Column id="column5">
+					    <header>
+					        <Label text="Units On Order" id="label5"/>
+					    </header>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{ProductName}"/>
+							<ObjectNumber number="{          path: 'UnitPrice',          formatter: '.formatter.numberUnit'         }" unit="USD"/>
+							<Text text="{QuantityPerUnit}" id="input0"/>
+							<Text text="{ProductID}" id="input1"/>
+							<Text text="{CategoryID}" id="input2"/>
+							<Text text="{SupplierID}" id="input3"/>
+							<Text text="{UnitsInStock}" id="input4"/>
+							<Text text="{UnitsOnOrder}" id="input5"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			<customData>
+			    <sap.ui.core:CustomData key="w5g.dt.editable" value="false" xmlns:sap.ui.core="sap.ui.core" id="data39"/>
+			</customData>
+			</Table>
+		</semantic:content>
+
 
 		<semantic:sendEmailAction>
 			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
